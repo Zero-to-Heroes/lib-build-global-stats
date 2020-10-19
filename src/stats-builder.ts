@@ -45,7 +45,7 @@ export const extractStatsForGame = async (message: ReviewMessage, replayString: 
 		await Promise.all(StatsBuilder.statBuilders.map(builder => builder.extractStat(message, replay)))
 	)
 		.reduce((a, b) => a.concat(b), [])
-		.filter(stat => stat.value > 0);
+		.filter(stat => stat && stat.value > 0);
 	// console.log('build stats from game');
 	const statsFromGame = Object.assign(new GlobalStats(), {
 		stats: stats,
