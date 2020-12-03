@@ -78,14 +78,18 @@ export const buildChangedStats = (currentStats: GlobalStats, statsFromGame: Glob
 			);
 			const valueFromDb = statFromDb ? statFromDb.value : 0;
 			const mergedValue = statKey.startsWith('best')
-				? Math.max(valueFromDb, statFromGame.value)
+				? valueFromDb >= statFromGame.value
+					? null
+					: statFromGame.value
 				: valueFromDb + statFromGame.value;
-			return Object.assign(new GlobalStat(), {
-				id: (statFromDb || statFromGame).id,
-				statKey: statKey,
-				value: mergedValue,
-				statContext: context,
-			} as GlobalStat);
+			return mergedValue != null
+				? Object.assign(new GlobalStat(), {
+						id: (statFromDb || statFromGame).id,
+						statKey: statKey,
+						value: mergedValue,
+						statContext: context,
+				  } as GlobalStat)
+				: null;
 		})
 		.filter(stat => stat);
 	return Object.assign(new GlobalStats(), {
