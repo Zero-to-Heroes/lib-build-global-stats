@@ -7,7 +7,6 @@ import { StatBuilder } from './_stat-builder';
 export class TotalEnemyHeroesKilled implements StatBuilder {
 	public async extractStat(message: ReviewMessage, replay: Replay): Promise<readonly GlobalStat[]> {
 		const numberOfKilledEnemeyHeroes = extractNumberOfKilledEnemyHeroes(replay);
-		// console.log('numberOfKilledEnemeyHeroes', numberOfKilledEnemeyHeroes);
 
 		const contexts = buildContexts(replay);
 		return contexts.map(

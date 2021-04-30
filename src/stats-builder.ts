@@ -40,13 +40,11 @@ class StatsBuilder {
 
 export const extractStatsForGame = async (message: ReviewMessage, replayString: string): Promise<GlobalStats> => {
 	const replay: Replay = parseHsReplayString(replayString);
-	// console.log('parsed replay');
 	const stats: readonly GlobalStat[] = (
 		await Promise.all(StatsBuilder.statBuilders.map(builder => builder.extractStat(message, replay)))
 	)
 		.reduce((a, b) => a.concat(b), [])
 		.filter(stat => stat && stat.value > 0);
-	// console.log('build stats from game');
 	const statsFromGame = Object.assign(new GlobalStats(), {
 		stats: stats,
 	} as GlobalStats);
@@ -62,7 +60,6 @@ export const buildChangedStats = (currentStats: GlobalStats, statsFromGame: Glob
 	];
 	const newStats = uniqueKeys
 		.map(key => {
-			// console.log('handling key', key);
 			const statKey = key.split('|')[0];
 			const context = key.split('|')[1];
 			const statFromGame: GlobalStat = statsFromGame.stats.find(
@@ -106,7 +103,6 @@ export const mergeStats = (currentStats: GlobalStats, statsFromGame: GlobalStats
 	];
 	const newStats = uniqueKeys
 		.map(key => {
-			// console.log('handling key', key);
 			const statKey = key.split('|')[0];
 			const context = key.split('|')[1];
 			const statFromGame: GlobalStat = statsFromGame.stats.find(

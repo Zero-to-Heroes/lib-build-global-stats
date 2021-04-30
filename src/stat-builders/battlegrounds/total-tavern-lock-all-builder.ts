@@ -12,13 +12,11 @@ export class TotalTavernLockAllBuilder implements StatBuilder {
 			return [];
 		}
 		const lockCardIds = ['TB_BaconShopLockAll_Button'];
-		// console.log('lockCardIds', lockCardIds);
 		const lockAllButtonIds = lockCardIds
 			.map(cardId =>
 				replay.replay.findall(`.//FullEntity[@cardID='${cardId}']`).map(entity => parseInt(entity.get('id'))),
 			)
 			.reduce((a, b) => a.concat(b), []);
-		// console.log('lockAllButtonIds', lockAllButtonIds);
 		const lockAllBlocks = lockAllButtonIds
 			.map(lockButtonEntityId =>
 				replay.replay
@@ -26,7 +24,6 @@ export class TotalTavernLockAllBuilder implements StatBuilder {
 					.filter(block => block.findall(`.//TagChange[@tag='${GameTag.FROZEN}'][@value='1']`).length > 0),
 			)
 			.reduce((a, b) => a.concat(b), []).length;
-		console.log('lockAllBlocks', lockAllBlocks);
 		return [
 			{
 				statKey: 'total-tavern-lock-all',

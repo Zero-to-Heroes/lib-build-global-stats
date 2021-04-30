@@ -121,7 +121,6 @@ export const buildContext = (replay: Replay): StatContext => {
 				case ScenarioId.GALAKROND_EVIL_CHAP_4_FIGHT_3_HEROIC:
 					return 'galakrond';
 				default:
-					console.log('returning default AI mode', replay.scenarioId, replay.gameFormat, replay.gameType);
 					return 'adventure';
 			}
 		case GameType.GT_RANKED:

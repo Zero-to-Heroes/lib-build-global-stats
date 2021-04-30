@@ -10,9 +10,7 @@ export class TotalManaSpentBuilder implements StatBuilder {
 			return [];
 		}
 		const totalManaSpent = extractTotalManaSpent(replay);
-		// console.log('total mana spent', totalManaSpent);
 		const contexts = buildContexts(replay);
-		// console.log('contexts', contexts);
 		return contexts.map(
 			context =>
 				({

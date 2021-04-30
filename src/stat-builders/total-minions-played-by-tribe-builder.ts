@@ -22,7 +22,6 @@ export class TotalMinionsPlayedByTribe implements StatBuilder {
 				tribe: Race[tribe].toLowerCase(),
 				numberOfMinions: playerMinionsGroupedByTribe[tribe].length,
 			}));
-		// console.log('number of minions by tribe', numberOfPlayerMinionsByTribe);
 		const contexts = buildContexts(replay);
 		return numberOfPlayerMinionsByTribe
 			.map(metric =>
