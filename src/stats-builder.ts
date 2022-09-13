@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { parseHsReplayString, Replay } from '@firestone-hs/hs-replay-xml-parser/dist/public-api';
+import { AllCardsService } from '@firestone-hs/reference-data';
 // import { fetch } from 'node-fetch';
 // import { Rds } from './db/rds';
 import { GlobalStat } from './model/global-stat';
@@ -38,8 +39,12 @@ class StatsBuilder {
 	}
 }
 
-export const extractStatsForGame = async (message: ReviewMessage, replayString: string): Promise<GlobalStats> => {
-	const replay: Replay = parseHsReplayString(replayString);
+export const extractStatsForGame = async (
+	message: ReviewMessage,
+	replayString: string,
+	allCards: AllCardsService,
+): Promise<GlobalStats> => {
+	const replay: Replay = parseHsReplayString(replayString, allCards);
 	const stats: readonly GlobalStat[] = (
 		await Promise.all(StatsBuilder.statBuilders.map(builder => builder.extractStat(message, replay)))
 	)

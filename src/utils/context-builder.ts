@@ -1,5 +1,11 @@
 import { Replay } from '@firestone-hs/hs-replay-xml-parser/dist/public-api';
-import { GameFormat, GameType, ScenarioId } from '@firestone-hs/reference-data';
+import {
+	DALARAN_HEIST_ALL,
+	GameFormat,
+	GameType,
+	PRACTICE_ALL,
+	TOMBS_OF_TERROR_ALL,
+} from '@firestone-hs/reference-data';
 import { StatContext } from '../model/context.type';
 
 export const buildContext = (replay: Replay): StatContext => {
@@ -18,111 +24,14 @@ export const buildContext = (replay: Replay): StatContext => {
 		case GameType.GT_BATTLEGROUNDS_FRIENDLY:
 			return 'battlegrounds';
 		case GameType.GT_VS_AI:
-			switch (replay.scenarioId) {
-				case ScenarioId.PRACTICE_MAGE:
-				case ScenarioId.PRACTICE_WARLOCK:
-				case ScenarioId.PRACTICE_HUNTER:
-				case ScenarioId.PRACTICE_ROGUE:
-				case ScenarioId.PRACTICE_PRIEST:
-				case ScenarioId.PRACTICE_WARRIOR:
-				case ScenarioId.PRACTICE_MAGE_EXPERT:
-				case ScenarioId.PRACTICE_DRUID:
-				case ScenarioId.PRACTICE_PALADIN:
-				case ScenarioId.PRACTICE_SHAMAN:
-				case ScenarioId.PRACTICE_WARRIOR_EXPERT:
-				case ScenarioId.PRACTICE_PRIEST_EXPERT:
-				case ScenarioId.PRACTICE_WARLOCK_EXPERT:
-				case ScenarioId.PRACTICE_DRUID_EXPERT:
-				case ScenarioId.PRACTICE_ROGUE_EXPERT:
-				case ScenarioId.PRACTICE_HUNTER_EXPERT:
-				case ScenarioId.PRACTICE_PALADIN_EXPERT:
-				case ScenarioId.PRACTICE_SHAMAN_EXPERT:
-					return 'practice';
-				case ScenarioId.DALARAN_HEIST_CHAPTER_1:
-				case ScenarioId.DALARAN_HEIST_CHAPTER_2:
-				case ScenarioId.DALARAN_HEIST_CHAPTER_3:
-				case ScenarioId.DALARAN_HEIST_CHAPTER_4:
-				case ScenarioId.DALARAN_HEIST_CHAPTER_5:
-					return 'dalaran-heist';
-				case ScenarioId.DALARAN_HEIST_CHAPTER_1_HEROIC:
-				case ScenarioId.DALARAN_HEIST_CHAPTER_2_HEROIC:
-				case ScenarioId.DALARAN_HEIST_CHAPTER_3_HEROIC:
-				case ScenarioId.DALARAN_HEIST_CHAPTER_4_HEROIC:
-				case ScenarioId.DALARAN_HEIST_CHAPTER_5_HEROIC:
-					return 'dalaran-heist-heroic';
-				case ScenarioId.DUNGEON_RUN:
-					return 'dungeon-run';
-				case ScenarioId.MONSTER_HUNT:
-				case ScenarioId.MONSTER_HUNT_FINAL:
-					return 'monster-hunt';
-				case ScenarioId.RUMBLE_RUN:
-					return 'rumble-run';
-				case ScenarioId.TOMBS_OF_TERROR_BOB:
-				case ScenarioId.TOMBS_OF_TERROR_CHAPTER_1:
-				case ScenarioId.TOMBS_OF_TERROR_CHAPTER_2:
-				case ScenarioId.TOMBS_OF_TERROR_CHAPTER_3:
-				case ScenarioId.TOMBS_OF_TERROR_CHAPTER_4:
-				case ScenarioId.TOMBS_OF_TERROR_CHAPTER_5:
-					return 'tombs-of-terror';
-				case ScenarioId.TOMBS_OF_TERROR_BOB_HEROIC:
-				case ScenarioId.TOMBS_OF_TERROR_CHAPTER_1_HEROIC:
-				case ScenarioId.TOMBS_OF_TERROR_CHAPTER_2_HEROIC:
-				case ScenarioId.TOMBS_OF_TERROR_CHAPTER_3_HEROIC:
-				case ScenarioId.TOMBS_OF_TERROR_CHAPTER_4_HEROIC:
-				case ScenarioId.TOMBS_OF_TERROR_CHAPTER_5_HEROIC:
-					return 'tombs-of-terror-heroic';
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_1_FIGHT_1:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_1_FIGHT_2:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_1_FIGHT_3:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_2_FIGHT_1:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_2_FIGHT_2:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_2_FIGHT_3:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_3_FIGHT_1:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_3_FIGHT_2:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_3_FIGHT_3:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_4_FIGHT_1:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_4_FIGHT_2:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_4_FIGHT_3:
-				case ScenarioId.GALAKROND_EVIL_CHAP_1_FIGHT_1:
-				case ScenarioId.GALAKROND_EVIL_CHAP_1_FIGHT_2:
-				case ScenarioId.GALAKROND_EVIL_CHAP_1_FIGHT_3:
-				case ScenarioId.GALAKROND_EVIL_CHAP_2_FIGHT_1:
-				case ScenarioId.GALAKROND_EVIL_CHAP_2_FIGHT_2:
-				case ScenarioId.GALAKROND_EVIL_CHAP_2_FIGHT_3:
-				case ScenarioId.GALAKROND_EVIL_CHAP_3_FIGHT_1:
-				case ScenarioId.GALAKROND_EVIL_CHAP_3_FIGHT_2:
-				case ScenarioId.GALAKROND_EVIL_CHAP_3_FIGHT_3:
-				case ScenarioId.GALAKROND_EVIL_CHAP_4_FIGHT_1:
-				case ScenarioId.GALAKROND_EVIL_CHAP_4_FIGHT_2:
-				case ScenarioId.GALAKROND_EVIL_CHAP_4_FIGHT_3:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_1_FIGHT_1_HEROIC:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_1_FIGHT_2_HEROIC:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_1_FIGHT_3_HEROIC:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_2_FIGHT_1_HEROIC:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_2_FIGHT_2_HEROIC:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_2_FIGHT_3_HEROIC:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_3_FIGHT_1_HEROIC:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_3_FIGHT_2_HEROIC:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_3_FIGHT_3_HEROIC:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_4_FIGHT_1_HEROIC:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_4_FIGHT_2_HEROIC:
-				case ScenarioId.GALAKROND_EXPLORER_CHAP_4_FIGHT_3_HEROIC:
-				case ScenarioId.GALAKROND_EVIL_CHAP_1_FIGHT_1_HEROIC:
-				case ScenarioId.GALAKROND_EVIL_CHAP_1_FIGHT_2_HEROIC:
-				case ScenarioId.GALAKROND_EVIL_CHAP_1_FIGHT_3_HEROIC:
-				case ScenarioId.GALAKROND_EVIL_CHAP_2_FIGHT_1_HEROIC:
-				case ScenarioId.GALAKROND_EVIL_CHAP_2_FIGHT_2_HEROIC:
-				case ScenarioId.GALAKROND_EVIL_CHAP_2_FIGHT_3_HEROIC:
-				case ScenarioId.GALAKROND_EVIL_CHAP_3_FIGHT_1_HEROIC:
-				case ScenarioId.GALAKROND_EVIL_CHAP_3_FIGHT_2_HEROIC:
-				case ScenarioId.GALAKROND_EVIL_CHAP_3_FIGHT_3_HEROIC:
-				case ScenarioId.GALAKROND_EVIL_CHAP_4_FIGHT_1_HEROIC:
-				case ScenarioId.GALAKROND_EVIL_CHAP_4_FIGHT_2_HEROIC:
-				case ScenarioId.GALAKROND_EVIL_CHAP_4_FIGHT_3_HEROIC:
-					return 'galakrond';
-				default:
-					return 'adventure';
+			if (PRACTICE_ALL.includes(replay.scenarioId)) {
+				return 'practice';
+			} else if (DALARAN_HEIST_ALL.includes(replay.scenarioId)) {
+				return 'dalaran-heist';
+			} else if (TOMBS_OF_TERROR_ALL.includes(replay.scenarioId)) {
+				return 'tombs-of-terror';
 			}
+			return 'adventure';
 		case GameType.GT_RANKED:
 			switch (replay.gameFormat) {
 				case GameFormat.FT_STANDARD:
